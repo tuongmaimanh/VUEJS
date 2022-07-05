@@ -1,0 +1,52 @@
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "Pork Sandwich",
+            "image": "https://i.ibb.co/q5WJKsQ/single-food-1.png",
+            "description": "They are wherein heaven seed hath nothing",
+            "price": "40",
+            "incart": "1"
+        },
+        {
+            "id": "2",
+            "name": "Roasted Marrow",
+            "image": "https://i.ibb.co/PW3s4VS/single-food-2.png",
+            "description": "They are wherein heaven seed hath nothing",
+            "price": "40",
+            "incart": "1"
+        },
+        {
+            "id": "3",
+            "name": "Summer Cooking",
+            "image": "https://i.ibb.co/cFc2N0W/single-food-3.png",
+            "description": "They are wherein heaven seed hath nothing",
+            "price": "40",
+            "incart": "1"
+        },
+        {
+            "id": "4",
+            "name": "Easter Delight",
+            "image": "https://i.ibb.co/KwGMrM9/single-food-4.png",
+            "description": "They are wherein heaven seed hath nothing",
+            "price": "40",
+            "incart": "1"
+        },
+        {
+            "id": "5",
+            "name": "Tiener Schnitze",
+            "image": "https://i.ibb.co/jLnjxTP/single-food-5.png",
+            "description": "They are wherein heaven seed hath nothing",
+            "price": "40",
+            "incart": "1"
+        },
+        {
+            "id": "6",
+            "name": "Chicken Roast",
+            "image": "https://i.ibb.co/WNCzSyt/single-food-6.png",
+            "description": "They are wherein heaven seed hath nothing",
+            "price": "40",
+            "incart": "1"
+        }
+    ]
+}
