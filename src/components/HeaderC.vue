@@ -1,7 +1,14 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="background-image:url('https://image.shutterstock.com/image-photo/oktoberfest-food-panorama-on-white-260nw-1496779814.jpg')">
+  <nav
+    class="navbar navbar-expand-sm navbar-dark bg-dark"
+    style="
+      background-image: url('https://image.shutterstock.com/image-photo/oktoberfest-food-panorama-on-white-260nw-1496779814.jpg');
+    "
+  >
     <div class="container-fluid">
-      <a class="navbar-brand" href="javascript:void(0)"><img src="https://i.ibb.co/PDxg7f1/logo.png" alt=""></a>
+      <a class="navbar-brand" href="javascript:void(0)"
+        ><img src="https://i.ibb.co/PDxg7f1/logo.png" alt=""
+      /></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -22,14 +29,7 @@
             <a class="nav-link" href="javascript:void(0)">Link</a>
           </li>
           <li>
-            <form class="d-flex">
-              <input
-                class="form-control me-2"
-                type="text"
-                placeholder="Search"
-                v-model="a"
-              />
-            </form>
+           
           </li>
         </ul>
 
@@ -51,8 +51,7 @@
             role="button"
             data-bs-toggle="dropdown"
             style="color: black"
-            >Account</a
-          >
+            >Account</a>
           <ul class="dropdown-menu">
             <li>
               <div v-if="user" style="color: aliceblue">
@@ -65,7 +64,7 @@
                 </button>
               </div>
             </li>
-            <hr>
+            <hr />
             <li>
               <!-- admin bar -->
               <div v-if="user == 'admin@gmail.com'" style="color: aliceblue">
@@ -81,7 +80,6 @@
     </div>
   </nav>
 
-  
   <CartModelC></CartModelC>
 </template>
 

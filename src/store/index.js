@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, child, get,set } from "firebase/database";
+import { getDatabase, ref, child, get, set } from "firebase/database";
 // import { getDatabase,ref } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyBNB-jLEXoh-BwXhb2i7je34mYiqv-9D9k",
@@ -28,6 +28,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+
+//Dữ liệu vuex setup
 export default createStore({
   state: {
     cart: [],
@@ -45,6 +47,7 @@ export default createStore({
     user: (state) => state.user,
     productChoose: (state) => state.productChoose,
   },
+  //MUTATIONS
   mutations: {
     addToCart(state, product) {
       if (state.cart.find((item) => item.id === product.id)) {
@@ -74,8 +77,10 @@ export default createStore({
     ///////////////////////////////////////////////
     setProductChoose(state, product) {
       state.productChoose = JSON.parse(JSON.stringify(product));
-    }
+    },
   },
+
+  //ACTIONS
   actions: {
     addToCart(context, product) {
       context.commit("addToCart", product);
@@ -83,10 +88,7 @@ export default createStore({
     removeFromCart(context, product) {
       context.commit("removeFromCart", product);
     },
-    ///////////////////////////////////////////////
-    
 
-    //////////////////////////////////////////////
     async login({ commit }, details) {
       const { email, password } = details;
 
@@ -114,7 +116,6 @@ export default createStore({
 
     async register({ commit }, details) {
       const { email, password } = details;
-
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         // this.state.user = auth.currentUser
@@ -179,68 +180,79 @@ export default createStore({
     },
 
     ///////////////////////////////////////////////
-   async addProduct({ commit }, product) {
-     
-     const products = await get(child(dbRef, `products/`));
-     const productsArray = products.val();
-     if(productsArray.find(item => item.name === product.name)){
+    async addProduct({ commit }, product) {
+      const products = await get(child(dbRef, `products/`));
+      const productsArray = products.val();
+      if (productsArray.find((item) => item.name === product.name)) {
         alert("Product already in database");
-      }else{
-     product.id = productsArray.length + 1;
-     product.incart = 1;
-      console.log(productsArray);
-      productsArray.push(product);
-      console.log(productsArray);
-      await set(child(dbRef, `products/`), productsArray);
-      
-      commit("setProducts", productsArray);
-      alert("Product added to database");
+      } else {
+        product.id = productsArray.length + 1;
+        product.incart = 1;
+        console.log(productsArray);
+        productsArray.push(product);
+        console.log(productsArray);
+        await set(child(dbRef, `products/`), productsArray);
+
+        commit("setProducts", productsArray);
+        alert("Product added to database");
       }
     },
 
- async editProductChoose({ commit }, product) {
-    const products = await get(child(dbRef, `products/`));
-    const productsArray = products.val();
-    const productChoose = productsArray.find(item => item.id === product.id);
-    // productsArray[productIndex] = product;
-    // await set(child(dbRef, `products/`), productsArray);
-    console.log(productChoose);
-    commit("setProductChoose", productChoose);
-  },
-  async edit({ commit }, product) {
-    const products = await get(child(dbRef, `products/`));
-    const productsArray = products.val();
-    
-    const productIndex = productsArray.findIndex(item => item.id === product.id);
-    if(productsArray[productIndex].name === product.name){
-    console.log(productIndex);
-    console.log(product);
-    productsArray[productIndex] = product;
-    await set(child(dbRef, `products/`), productsArray);
-    commit("setProducts", productsArray);
-    alert("Product edited");
-  }else{
-    const searchName=productsArray.find(item => item.name === product.name);
-    if(searchName){
-      alert("The name of the product already exists");
-    }else{
-      productsArray[productIndex] = product;
+    async editProductChoose({ commit }, product) {
+      const products = await get(child(dbRef, `products/`));
+      const productsArray = products.val();
+      const productChoose = productsArray.find(
+        (item) => item.id === product.id
+      );
+      // productsArray[productIndex] = product;
+      // await set(child(dbRef, `products/`), productsArray);
+      console.log(productChoose);
+      commit("setProductChoose", productChoose);
+    },
+    async edit({ commit }, product) {
+      const products = await get(child(dbRef, `products/`));
+      const productsArray = products.val();
+
+      const productIndex = productsArray.findIndex(
+        (item) => item.id === product.id
+      );
+      //người dùng ko sửa tên
+      if (productsArray[productIndex].name === product.name) {
+        console.log(productIndex);
+        console.log(product);
+        productsArray[productIndex] = product;
+        await set(child(dbRef, `products/`), productsArray);
+        commit("setProducts", productsArray);
+        alert("Product edited");
+        window.location.replace("/admin");
+      } else {
+        //người dùng sửa tên 
+        const searchName = productsArray.find(
+          (item) => item.name === product.name
+        );
+        //người dùng sửa tên nhưng trùng
+        if (searchName) {
+          alert("The name of the product already exists");
+        } else {
+          productsArray[productIndex] = product;
+          await set(child(dbRef, `products/`), productsArray);
+          commit("setProducts", productsArray);
+          alert("Product edited");
+          window.location.replace("/admin");
+        }
+      }
+    },
+    async deleteProduct({ commit }, product) {
+      const products = await get(child(dbRef, `products/`));
+      const productsArray = products.val();
+      const productIndex = productsArray.findIndex(
+        (item) => item.id === product.id
+      );
+      productsArray.splice(productIndex, 1);
       await set(child(dbRef, `products/`), productsArray);
       commit("setProducts", productsArray);
-      alert("Product edited");
-    }
-  }
-
+      alert("Product deleted");
+      window.location.replace("/admin");
+    },
   },
-  async deleteProduct({ commit }, product) {
-    const products = await get(child(dbRef, `products/`));
-    const productsArray = products.val();
-    const productIndex = productsArray.findIndex(item => item.id === product.id);
-    productsArray.splice(productIndex, 1);
-    await set(child(dbRef, `products/`), productsArray);
-    commit("setProducts", productsArray);
-    alert("Product deleted");
-  }
-}
-
 });
