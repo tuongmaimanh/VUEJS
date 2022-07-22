@@ -27,7 +27,7 @@
                     <td><img :src="product.image" ></td>
                     <td>{{product.name}}</td>
                     <input min="1" type="number" v-model="product.incart" width="50px" :max="product.qty">
-                    <p style="color:red" v-if="product.incart==product.qty">*Sản phẩm trong kho đã hết,<br> nếu muốn mua số lượng mặt hàng lớn hơn {{product.qty}} vui lòng liên hệ trực tiếp!</p>
+                    <p style="color:red" v-if="product.incart==product.qty">*Sản phẩm trong kho đã hết,<br> nếu muốn mua số lượng mặt hàng lớn hơn {{product.qty}} <br> vui lòng liên hệ trực tiếp!</p>
                     <td>{{product.price}}</td>
                     <td>{{product.price*product.incart}} $</td>
                     <td>
@@ -57,10 +57,7 @@
     </div>
   </div>
 
-  <div class="modal-body" >
-    <h1>Cart rỗng</h1>
-
-  </div>
+ 
 </div>
 
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <h3>Add product</h3>
-  <form @submit.prevent="edit()">
+  <h3>EDIT PRODUCT</h3>
+  <form @submit.prevent="edit()" style="background-image: url('https://static-cse.canva.com/blob/572026/removingbackgroundimages_Unsplash.jpeg');">
     <div class="form-group">
       <label for="exampleInputEmail1">Name</label>
       <input
@@ -53,7 +53,6 @@
       />
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-    <h1>{{productChoose}}</h1>
   </form>
 </template>
 
@@ -64,11 +63,7 @@ export default {
   setup() {
     onBeforeMount(() => {
     });
-   
-    
     return {
-      
-       
     };
   },
   data() {

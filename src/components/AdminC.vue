@@ -1,7 +1,10 @@
 <template>
-    <div class="row w-75">
+<div class="container">
+
+    <div class="row " >
         <div class="col-md-12">
-        <div class="card">
+        <div class="card" style="background-image: url('https://wallpaperaccess.com/full/5229.jpg');">
+            <router-link to="/home">Trang chủ</router-link>
             <div class="card-header">
             <h4 class="card-title">Danh sách sản phẩm</h4>
             </div>
@@ -66,6 +69,7 @@
         </div>
         </div>
     </div>
+</div>
 
 
 </template>

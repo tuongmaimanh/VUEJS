@@ -1,10 +1,18 @@
 <template>
-  <div class="row" style="background-image: linear-gradient(to right,grey,white)">
+  <div class="row" style="background-image:url('https://www.teahub.io/photos/full/41-412275_com-apple-iphone-wallpaper-sm41-red-blue-soft.jpg')">
+   <form class="d-flex" >
+              <input
+                class="form-control me-2"
+                type="text"
+                placeholder="Search"
+                v-model="searchKey"
+              />
+            </form>
     <div
-      v-for="product in products"
+      v-for="product in search"
       :key="product.id"
       class="card"
-      style="width: 400px; margin-left: 30px"
+      style="width: 350px; margin-left: 30px; margin-top: 10px;"
     >
       <img
         class="card-img-top"
@@ -49,7 +57,25 @@ export default {
   name: "ProductC",
   computed: {
     ...mapGetters(["cart","products"]),
+    // search
+            search() {
+                if (this.searchKey == "") {
+                    return this.products;
+                }
+                console.log(this.searchKey);
 
+                var search = this.searchKey.trim().toLowerCase();
+                console.log(search);
+                
+                return this.products.filter(item => {
+                    return item.name.toLowerCase().includes(search);
+                });
+            },
+  },
+  data(){
+    return{
+      searchKey:""
+    }
   },
   mounted() {
     
